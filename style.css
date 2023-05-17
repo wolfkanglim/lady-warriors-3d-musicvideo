@@ -1,0 +1,31 @@
+
+#overlay{
+     width: 100vw;
+     height: 100vh;
+     background: #000;
+     text-align: center;
+     display: inline-block;
+}
+#gallery{
+     display: inline-flex;
+}
+#gallery > div{
+     width: 30%;
+     margin: auto;
+     border-radius: 10px;
+     box-shadow: 0 0 10px #555;
+     overflow: hidden;
+}
+#gallery div img{
+     max-width: 100%;
+}
+#startButton{
+     padding: 10px 20px;
+     border-radius: 20px;
+}
+
+
+#info {
+     text-align: left;				
+}
+

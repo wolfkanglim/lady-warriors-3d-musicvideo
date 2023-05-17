@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+    
+     <link type="text/css" rel="stylesheet" href="./style.css">
+     
+
+     <link rel="shortcut icon" href="#" />
+
+   
+     <script src="./js/ammo.js" type="text/javascript"></script> 
+</head>
+     
+<body>
+     <div id="overlay">
+          <div>
+               <h1>3D Music Visualization</h1>
+               <div id="gallery">
+                    <div><img src="./assets/images/taeguk3.png" alt=""></div>					
+                    <div><img src="./assets/images/compact-cd.png" alt=""></div>					
+                    <div><img src="./assets/images/spark1.png"></div>			
+               </div>
+          </div>
+          <div>
+               <button id="startButton">Play</button>
+          </div>
+          <hr>
+          <div>
+               <i> 3d music video in Three js. cloth, flare, light effects and visualization </i>
+               <i>Made by Khamisi Kibet</i>
+               <i>Recreated by Wondrous East - Wolfkang</i>
+          </div>
+          
+     </div>
+     
+     <div id="container"></div>
+
+     <!-- Information displayed on top of container -->
+     <div id="info">
+          
+     </div>
+     
+     <video id="video1" loop crossOrigin="anonymous" playsinline style="display:none">			
+          <source src="./assets/videos/orpheusV1.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+     </video>
+
+         
+     <script type="module" src="./script.js"></script>
+
+</body>
+</html>
