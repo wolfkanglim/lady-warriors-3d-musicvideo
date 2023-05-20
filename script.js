@@ -4,20 +4,59 @@ import { FBXLoader } from './js/FBXLoader.js';
 import { Lensflare, LensflareElement } from './js/Lensflare.js';
 import {ParametricGeometry} from './js/ParametricGeometry.js';
 
+
+// Loading Progress using loadingManager
+let loading = [];
+const progressBarContainer = document.querySelector('.progress-bar-container');
+const progressBar = document.getElementById('progress-bar');
+const loadingManager = new THREE.LoadingManager();
+const textureLoader = new THREE.TextureLoader(loadingManager);
+const loader = new FBXLoader(loadingManager);
+
+ loadingManager.onStart = function(url, itemsLoaded, itemsTotal){
+console.log(`Started Loading..: ${url}`);
+     if ( loading[ url ] !== undefined ) {
+          loading[ url ].push( {
+               onLoad: onLoad,
+               onProgress: onProgress,
+               onError: onError
+          } );
+          return;
+     }
+}  
+
+ loadingManager.onProgress = function(url, itemsLoaded, itemsTotal){
+     console.log(`Loading...: ${url}`);
+     console.log(`Loaded...: ${itemsLoaded}`);
+     console.log(`Total...: ${itemsTotal}`);
+     progressBar.value = (itemsLoaded / itemsTotal) * 100;
+}
+
+loadingManager.onLoad = function(url){
+     //console.log('Loading Finished');
+     progressBarContainer.style.display = 'none';   
+}
+
+loadingManager.onError = function(){
+     console.log(`Loading Problem...: ${url}`);
+} 
+
+
+
 // CLOTH SIMULATION using a relaxed constraints solver
                
 const params = {
      enableWind: true,
-     tooglePins: true
+     togglePins: togglePins
 };
 
-let DAMPING = 0.03;
+let DAMPING = 0.004;
 let DRAG = 1 - DAMPING;
-let MASS = 0.91;
-let restDistance = 37;
+let MASS = 0.981;
+let restDistance = 32.7;
 
 let xSegs = 10;
-let ySegs = 14;
+let ySegs = 17;
 
 const clothFunction = plane( restDistance * xSegs, restDistance * ySegs );
 
@@ -93,7 +132,7 @@ function satisfyConstraints( p1, p2, distance ) {
 
 function Cloth( w, h ) {
      w = w || 10;
-     h = h || 15;
+     h = h || 17;
      this.w = w;
      this.h = h;
 
@@ -216,13 +255,21 @@ function simulate( now ) {
           p.position.copy( p.original );
           p.previous.copy( p.original );
      }
+     
 }
 
 /* testing cloth simulation */
 let pinsFormation = [];
 pins = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
 pinsFormation.push( pins );
-pins = pinsFormation[ 0 ];
+pins = [ 0, 10 ];
+pinsFormation.push( pins );
+pins = pinsFormation[ 1 ];
+
+function togglePins() {
+     pins = pinsFormation[ ~ ~ ( Math.random() * pinsFormation.length ) ];
+}
+
 
 // DEFINE VARIABLES for Three
 let scene, camera, renderer, analyser, uniforms, audio, controls, cameraTarget, boxMesh, clock, object, objectLeft;
@@ -241,16 +288,17 @@ let y_res = "add";
 let x_res = "add";
 // 
 let mixer, mixer2, mixer3, mixer4, mixer5;
+let ready = false;
 let clothGeometry, pos;
 
-const startButton = document.getElementById( 'startButton' );
+ const startButton = document.getElementById( 'startButton' );
 startButton.addEventListener( 'click', function () {
      Ammo().then( function () {
           init();
      } );
-} );
+} ); 
 
-const textureLoader = new THREE.TextureLoader();
+//const textureLoader = new THREE.TextureLoader(loadingManager);
 
 // 
 function init() {
@@ -274,7 +322,7 @@ function init() {
      //camera = new THREE.Camera();
      camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 10000 );
      
-     camera.position.set( 0, Math.floor(Math.random() * 25 + 1), Math.random() * 20 + 20 );
+     camera.position.set( 0, Math.floor(Math.random() * 25 + 1), Math.random() * 20 + 40 );
      cameraTarget = new THREE.Vector3( 0, 0, 0  );
 
      // lights
@@ -488,7 +536,7 @@ function init() {
 
      // PLAY AUDIO FILE
      if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
-          const loader = new THREE.AudioLoader();
+          const loader = new THREE.AudioLoader(loadingManager);
           loader.load( file, function ( buffer ) {
                audio.setBuffer( buffer );
                audio.setVolume(0.5);
@@ -509,8 +557,8 @@ function init() {
      };	
 
      // LOAD MODEL Animation
-     let loader = new FBXLoader();
-     let ready = false;
+     //const loader = new FBXLoader(loadingManager);
+     
      loader.load( './assets/models/Thriller Part 4.fbx', function ( object ) {
           mixer = new THREE.AnimationMixer( object );
           let action = mixer.clipAction( object.animations[ 0 ] );
@@ -799,6 +847,7 @@ function init() {
      object.rotation.y = 1.65;
      object.castShadow = true;
      object.receiveShadow = true;
+     object.frustumCulled = false;
      scene.add( object );
 
      object.customDepthMaterial = new THREE.MeshDepthMaterial( {
@@ -820,6 +869,7 @@ function init() {
      objectLeft.rotation.y = 1.45;
      objectLeft.castShadow = true;
      objectLeft.receiveShadow = true;
+     objectLeft.frustumCulled = false;
      scene.add( objectLeft );
 
      objectLeft.customDepthMaterial = new THREE.MeshDepthMaterial( {

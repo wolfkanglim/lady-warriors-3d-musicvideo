@@ -1,4 +1,8 @@
-
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
 #overlay{
      width: 100vw;
      height: 100vh;
@@ -13,19 +17,51 @@
      width: 30%;
      margin: auto;
      border-radius: 10px;
-     box-shadow: 0 0 10px #555;
+     box-shadow: 3px 3px 10px #555;
      overflow: hidden;
 }
 #gallery div img{
      max-width: 100%;
 }
 #startButton{
+     margin: 20px auto;
      padding: 10px 20px;
+     width: 200px;
      border-radius: 20px;
 }
-
+#footer {
+     color: #fff;
+     margin: 10px auto;
+}
 
 #info {
+     position: absolute;
+     top: 10px;
+     left: 10px;
+     color: #fff;
      text-align: left;				
 }
 
+.progress-bar-container{
+     position:absolute;
+     display: none;
+     top: 0;
+     left: 0;
+     transform: translate(-50% -50%);
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.4);
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+}
+#progress-bar{
+     width: 50%;
+     margin: 0.21%;
+     height: 5%;
+}
+label{
+     color: #fff;
+     font-size: 24px;
+}

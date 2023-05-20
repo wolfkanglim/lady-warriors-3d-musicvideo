@@ -4,14 +4,9 @@
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Document</title>
-    
-     <link type="text/css" rel="stylesheet" href="./style.css">
-     
-
+     <title>Lady Warriors Dancing Party</title>    
+     <link type="text/css" rel="stylesheet" href="./style.css">    
      <link rel="shortcut icon" href="#" />
-
-   
      <script src="./js/ammo.js" type="text/javascript"></script> 
 </head>
      
@@ -29,25 +24,30 @@
                <button id="startButton">Play</button>
           </div>
           <hr>
-          <div>
+          <div id="footer">
                <i> 3d music video in Three js. cloth, flare, light effects and visualization </i>
-               <i>Made by Khamisi Kibet</i>
+               <i>Made by Khamisi Kibet</i><br>
                <i>Recreated by Wondrous East - Wolfkang</i>
           </div>
-          
+          <div><img src="./assets/images/wings23.png" width="50" height="50"></div>	
      </div>
-     
-     <div id="container"></div>
 
-     <!-- Information displayed on top of container -->
-     <div id="info">
-          
+     <div class="progress-bar-container">
+          <label for="progress-bar"> Loading..</label>
+          <progress id="progress-bar" value="0" max="100" ></progress>
      </div>
      
+     <div id="container">
+
+          <!-- Information displayed on top of container -->
+          <div id="info">
+               <i>Lady Warriors </i>         
+          </div>
+     </div>
      <video id="video1" loop crossOrigin="anonymous" playsinline style="display:none">			
-          <source src="./assets/videos/orpheusV1.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+          <source src="./assets/videos/lady-warrios3.mp4" type='video/mp4'>
+          <!-- <source src="./assets/videos/lady-warrios3.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'> -->
      </video>
-
          
      <script type="module" src="./script.js"></script>
 
