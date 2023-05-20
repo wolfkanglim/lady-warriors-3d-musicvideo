@@ -13,8 +13,7 @@ const loadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(loadingManager);
 const loader = new FBXLoader(loadingManager);
 
- loadingManager.onStart = function(url, itemsLoaded, itemsTotal){
-console.log(`Started Loading..: ${url}`);
+ loadingManager.onStart = function(url){
      if ( loading[ url ] !== undefined ) {
           loading[ url ].push( {
                onLoad: onLoad,
@@ -26,18 +25,15 @@ console.log(`Started Loading..: ${url}`);
 }  
 
  loadingManager.onProgress = function(url, itemsLoaded, itemsTotal){
-     console.log(`Loading...: ${url}`);
-     console.log(`Loaded...: ${itemsLoaded}`);
-     console.log(`Total...: ${itemsTotal}`);
      progressBar.value = (itemsLoaded / itemsTotal) * 100;
 }
 
-loadingManager.onLoad = function(url){
+loadingManager.onLoad = function(){
      //console.log('Loading Finished');
      progressBarContainer.style.display = 'none';   
 }
 
-loadingManager.onError = function(){
+loadingManager.onError = function(url){
      console.log(`Loading Problem...: ${url}`);
 } 
 
