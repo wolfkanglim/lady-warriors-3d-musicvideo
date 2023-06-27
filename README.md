@@ -1,9 +1,13 @@
 # lady-warriors-3d-musicvideo
-https://github.com/wolfkanglim/lady-warriors-3d-musicvideo/assets/74490365/3ecdbecc-51c6-46b1-bfd1-6b1fbd247550
+
 ### 3D Music Visualization Video/Three.js Cloth, Flare, Light effects
 reference 
 Based on 
 Three.js tutorial from SPINN TV 
+
+
+https://github.com/wolfkanglim/lady-warriors-3d-musicvideo/assets/74490365/7e7f4afb-f959-49c2-8570-7093132b5f41
+
 
 ![Scene 0 (00 00 24 360)](https://github.com/wolfkanglim/lady-warriors-3d-musicvideo/assets/74490365/6a235d7d-34b9-4a10-98b6-f3b76d025a3c)
 
